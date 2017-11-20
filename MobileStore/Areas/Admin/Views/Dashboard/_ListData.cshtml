@@ -1,0 +1,13 @@
+﻿@model Models.ViewModels.StatisticsViewModel
+
+<div id="header" class="tab-pane fade in active">
+    @Html.Partial("_Summary", Model.Summary)
+</div>
+
+<div class="top-sellers">
+    @Html.Partial("_TopSellers", Model.TopSellers)
+</div>
+
+<div class="top-sellers">
+    @Html.Partial("_TopCustomers", Model.TopCustomers)
+</div>

@@ -1,0 +1,52 @@
+﻿@model Models.ViewModels.CompleteOrderViewModel
+@{
+    ViewBag.Title = "Hoàn thành đặt hàng";
+}
+<div id="content" class="clearfix">
+    <div class="col-sm-3 col-xs-2"></div>
+    <div id="complete" class="col-sm-6 col-xs-8 bg-white">
+        <div class="row">
+            <img class="img-responsive" src="~/Assets/Common/images/about/main.jpg" />
+        </div>
+        <p>Cảm ơn <strong>@(Model.ShipGender ? "anh" : "chị") @Model.ShipName</strong> đã cho chúng tôi cơ hội được phục vụ. Trong vòng 5 phút, nhân viên của AnhDo Mobile sẽ gọi điện xác nhận đợn đặt hàng của @(Model.ShipGender ? "anh" : "chị").</p>
+        <br />
+        <p class="well well-sm margin_top20">THÔNG TIN ĐẶT HÀNG</p>
+        <ul>
+            <li><b>Thanh toán khi nhận hàng</b></li>
+            <li>Địa chỉ nhận hàng: @Model.ShipAddress</li>
+            <li>
+                Tổng tiền:
+                <b class="price">
+                    @Model.OrderTotal.ToString("N0")đ
+                </b>
+            </li>
+           
+        </ul>
+        <p>Khi cần hỗ trợ vui lòng gọi <a class="text-primary">1900.5995</a> (7h30 - 22h)</p>
+        <br />
+        <p class="well well-sm">SẢN PHẨM ĐÃ MUA</p>
+
+        @foreach (var item in Model.OrderItems)
+            {
+                    <!-- item -->
+            <div class="col-md-2 col-sm-3 col-xs-4 text-center padding-zero">
+                <a href="/dien-thoai-@item.Product.MetaTitle-@item.ProductId" title="@item.Product.Name">
+                    <img class="img-responsive" src="@item.Product.Image" alt="@item.Product.Name" />
+                </a>
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-8" style="font-size:13px">
+                <strong>@item.Product.Name</strong>
+                <div>Giá : @item.Price.Value.ToString("N0")đ</div>
+                <div>SL&nbsp; : @item.Quantity</div>
+                <div>
+                    <strong class="price">
+                        @((item.Price * item.Quantity).Value.ToString("N0"))<sup>đ</sup>
+                    </strong>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+                <div><hr /></div>
+                <!-- ./ item -->
+        }
+    </div>
+</div>

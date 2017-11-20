@@ -1,0 +1,44 @@
+﻿@model Models.ViewModels.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<div class="col-md-4 col-md-offset-4">
+    <div class="login-panel panel panel-default" style="background-color:#fff">
+        <div class="panel-heading">
+            Bạn đã chứng thực thành công với tài khoản <strong>@ViewBag.LoginProvider</strong>.
+            Vui lòng nhập thêm thông tin của bạn
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            {
+                <fieldset>
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Email)
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @placeholder= "Họ và tên" })
+                        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" class="btn btn-default" value="Đăng ký" />
+                        </div>
+                    </div>
+                </fieldset>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

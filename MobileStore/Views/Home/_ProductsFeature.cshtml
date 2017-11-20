@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Models.ViewModels.ProductBriefViewModel>
+<div class="title">
+    <h2><i class="fa fa-gratipay"></i> Sản phẩm bán chạy</h2>
+</div>
+<div class="col-xs-8 col-sm-9 item">
+    @foreach (var item in Model)
+    {
+        string delPrice = string.Empty;
+        if (item.PromotionPrice > 0)
+        {
+            delPrice = "line-through";
+        }
+        <!-- item -->
+        <div class="product-box">
+            <a href="/dien-thoai-@item.MetaTitle-@item.Id" title="@item.Name">
+                <img class="img-responsive" src="@item.Image" alt="@item.Name">
+            </a>
+            <h3 class="name">@item.Name</h3>
+            <div class="text-left" style="height:20px;">
+                @if (item.PromotionPrice > 0)
+                {
+                    <strong class="price">
+                        @Html.DisplayFor(model => item.PromotionPrice)
+                    </strong>
+                }
+            </div>
+            <div class="price-buy">
+                <strong class="price @delPrice">@Html.DisplayFor(model => item.Price)</strong>
+                <a href="@Url.Action("AddToCart", "Cart", new { productId = item.Id })">Mua ngay</a>
+            </div>
+
+        </div>
+        <!-- ./ -->
+    }
+</div>

@@ -1,0 +1,33 @@
+﻿@model Models.DAO.PaginatedList<Models.ViewModels.LoadProductCommentViewModel>
+
+<div class="edit-cmt">
+    <div class="form-group">
+        <label for="comment">Mời bạn để lại bình luận</label>
+        <textarea id="txt-comment-content" class="form-control" rows="5"></textarea>
+    </div>
+    <button id="btn-comment" class="btn btn-primary pull-right" data-product-id="@ViewBag.ProductId">Gửi</button>
+</div>
+<strong id="comment-count">@Model.TotalCount Bình Luận</strong>
+<hr />
+<ul class="list-comment">
+    @foreach (var comment in Model)
+    {
+        <li class="comment-ask">
+            <div class="row-user">
+                <a href="javascript:void(0)">
+                    <div>@comment.RepresentCommenter</div><strong>@comment.Commenter</strong>
+                </a>
+            </div>
+            <div class="question">@comment.Content</div>
+            <div class="action-user">
+                <a href="javascript:void(0)" onclick="productDetailCtl.replyComment(@comment.Id, false, this)" recipient="@comment.Commenter" class="respondent">Trả lời</a>
+                <a href="javascript:void(0)" class="time text-muted">&diams; @comment.CommentDate</a>
+            </div>
+            @Html.Partial("_CommentReply", comment)
+        </li>
+    }
+</ul>
+
+<div id="paging" class="clearfix">
+    @Html.Raw(Model.Paging("/dien-thoai"))
+</div>

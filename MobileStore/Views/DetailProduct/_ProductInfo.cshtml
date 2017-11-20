@@ -1,0 +1,39 @@
+﻿@model Models.ViewModels.ProductDetailViewModel
+
+<p><small>Mã SP: @Model.Code</small></p>
+@if (Model.PromotionPrice > 0)
+{
+    <strong class="price">@Html.DisplayFor(model => Model.PromotionPrice)<sup>đ</sup></strong>
+    <del><small>@Html.DisplayFor(model => Model.Price)<sup>đ</sup></small></del>
+}
+else
+{
+    <strong class="price">@Html.DisplayFor(model => Model.Price)<sup>đ</sup></strong>
+}
+
+<div><small>(Giá @(Model.IncludeVAT ? "đã" : "chưa bao") gồm VAT)</small></div>
+<div><small>Tình trạng: @(Model.Quantity > 0 ? "Còn hàng" : "Hết hàng")</small></div>
+
+@Html.Raw(Model.Detail)
+
+@if (Model.Quantity > 0)
+{
+    <div class="buy-now">
+        <div class="col-xs-6">
+            <a class="btn btn-block" href="@Url.Action("AddToCart", "Cart", new { productId = Model.Id })">
+                <strong>Mua ngay</strong>
+                <br />
+                <small>Giao hàng tận nơi</small>
+            </a>
+        </div>
+        <div class="col-xs-6">
+            <a class="btn btn-block" href="#" style="background-color: #385BDE;">
+                <strong>Mua trả góp</strong>
+                <br />
+                <small>Xét duyệt qua điện thoại</small>
+            </a>
+        </div>
+        <p class="text-center"><small>Gọi đặt mua: 1900 5995 (Miễn phí 7:30-22:00)</small></p>
+        <!-- </div> -->
+    </div>
+}

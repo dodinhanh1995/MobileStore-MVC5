@@ -1,0 +1,19 @@
+﻿@model Models.ViewModels.OrderDetailViewModel
+
+<h3>Thông tin khách hàng</h3>
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <td>Khách hàng</td>
+            <td>@(Model.Gender ? "anh" : "chị") @Model.Order.ShipName</td>
+        </tr>
+        <tr>
+            <td>Điện thoại</td>
+            <td>@Model.Order.ShipMobile</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>@Model.Order.ShipEmail</td>
+        </tr>
+    </tbody>
+</table>

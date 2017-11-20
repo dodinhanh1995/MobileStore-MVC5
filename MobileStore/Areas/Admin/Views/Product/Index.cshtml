@@ -1,0 +1,60 @@
+﻿@model PagedList.IPagedList<Models.ViewModels.ProductViewModels>
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="page-header">Danh sách sản phẩm</h4>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                @using (Ajax.BeginForm("Index", "Product", new AjaxOptions
+                {
+                    UpdateTargetId = "list-product"
+                }))
+                {
+                    <div class="col-md-5 pull-right" style="padding-right:0;">
+                    <div class="input-group custom-search-form">
+                        @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Tìm kiếm sản phẩm" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                }
+                @using (Html.BeginForm("Delete", "Product"))
+                {
+                    <p>
+                        <button type="submit" onclick="return confirm('Bạn có chắc là muốn xóa không')" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        <a href="@Url.Action("Create")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+                    </p>
+
+                    if (TempData["AlertMessage"] != null)
+                    {
+                        <div id="alertBox" class="alert alert-@TempData["AlertType"] text-center"> @Html.Raw(TempData["AlertMessage"])</div>
+                    }
+                    <div id="list-product">
+                        @Html.Partial("_ListProduct")
+                    </div>
+                }
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->

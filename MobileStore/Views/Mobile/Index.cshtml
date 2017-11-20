@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Models.ViewModels.ProductBriefViewModel>
+@{
+    ViewBag.Title = "Điện thoại ";
+}
+
+<div id="content" class="clearfix">
+    
+    @{Html.RenderAction("_Banner", "Mobile");}
+
+    <div hidden id="brand">@ViewBag.MetaTitle</div>
+    <div hidden id="sort">@ViewBag.SortOrder</div>
+    <nav class="col-xs-12 filter">
+        @Html.Partial("_Filter")
+    </nav>
+
+    <div class="products-brand clearfix">
+        @Html.Partial("_ProductBox")
+    </div>
+    @if (ViewBag.HasPaging)
+    {
+    <div id="load-more" class="text-center">
+        <button>Xem thêm sản phẩm <i class="fa fa-caret-down"></i></button>
+    </div>
+    }
+</div>
+
+@section scripts
+{
+    <script id="template" type="x-tmpl-mustache">
+        <!-- item -->
+        <div class="product-box">
+            <a href="/dien-thoai-{{MetaTitle}}-{{Id}}" title="{{Name}}">
+                <img class="img-responsive" src="{{Image}}" alt="{{Name}}" title="{{Name}}">
+            </a>
+            <h3 class="name">{{Name}}</h3>
+            <div class="text-left" style="height:20px;">
+                <strong class="price">{{PromotionPrice}}</strong>
+            </div>
+            <div class="price-buy">
+                <strong class="price {{delPrice}}">{{Price}}</strong>
+                <a href="/Cart/AddToCart?productId={{Id}}">Mua ngay</a>
+            </div>
+        </div>
+        <!-- ./ -->
+    </script>
+    @Scripts.Render("~/bundles/sc-mobile")
+    @*<script src="~/Assets/Client/controller/mobile.js"></script>*@
+}

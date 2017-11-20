@@ -1,0 +1,44 @@
+﻿@model Models.EF.ProductSpecification
+<div>
+    <h4 style="margin:0 0 10px;">Thông số kỹ thuật</h4>
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <td>Màn hình:</td>
+                <td>@Model.Screen</td>
+            </tr>
+            <tr>
+                <td> Hệ điều hành:</td>
+                <td>@Model.OperatingSystem</td>
+            </tr>
+            <tr>
+                <td>Camera sau:</td>
+                <td>@Model.CameraAfter</td>
+            </tr>
+            <tr>
+                <td> Camera trước: </td>
+                <td>@Model.CameraBefore</td>
+            </tr>
+            <tr>
+                <td>CPU:</td>
+                <td>@Model.CPU</td>
+            </tr>
+            <tr>
+                <td>RAM:</td>
+                <td>@Model.RAM</td>
+            </tr>
+            <tr>
+                <td>Bộ nhớ trong:</td>
+                <td>@Model.InternalMemory</td>
+            </tr>
+            <tr>
+                <td>Thẻ SIM:</td>
+                <td>@Model.SIM</td>
+            </tr>
+            <tr>
+                <td>Dung lượng pin:</td>
+                <td>@Model.PinCapacity</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+﻿@model Models.EF.ProductSpecification
+
+@{
+    ViewBag.Title = "Cập nhật thông số kỹ thuật sản phẩm";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Cập nhật thông số kỹ thuật <span class="label label-danger">@ViewBag.ProductName</span></h4>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <a class="btn" href="@Url.Action("Index")"><i class="fa fa-backward"></i> Quay lại</a>
+        @Html.Partial("_SpecificationForm")
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu lại</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

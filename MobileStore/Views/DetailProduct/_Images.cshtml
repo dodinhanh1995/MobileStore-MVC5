@@ -1,0 +1,16 @@
+﻿@using MobileStore.Helpers
+@model IEnumerable<string>
+
+<div class="img text-center">
+    <img id="main-img" class="img-responsive" />
+    <div class="row">
+        <div class="container-fluid">
+            @foreach (var item in Model)
+            {
+                <div class="col-xs-3 btn-img-thub" style="padding: 5px; cursor: pointer;">
+                    <img class="img-thumbnail img-responsive" src="@item" alt="@Html.ImageNameSigned(item)" title="@Html.ImageNameSigned(item)" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

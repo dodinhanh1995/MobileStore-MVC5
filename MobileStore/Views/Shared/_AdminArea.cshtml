@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Models.ViewModels.NavigationViewModel>
+
+@if (Model != null)
+{
+    <div id="admin-area">
+        <div class="container">
+            <div class="row">
+                @foreach (var menu in Model)
+                {
+                    <a href="@menu.Link" target="@menu.Target" title="@menu.Text">
+                        @Html.Raw(menu.Icon) @menu.Text
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Models.EF.MenuType>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.CheckBox("chkDeleteAll", new { id = "chkDeleteAll" })</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var menuType in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("menuTypeId", htmlAttributes: new { @class = "chkFieldId", value = menuType.Id })
+                </td>
+                <td><input type="text" value="@menuType.Name" class="form-control" /></td>
+                <td>
+                    <button type="button" class="btn btn-outline btn-link editingMenuType" data-id="@menuType.Id">
+                        <i class="fa fa-edit"></i> Edit
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<Models.ViewModels.FullCommentViewModel>
+
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Danh sách bình luận";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="page-header">Danh sách bình luận</h4>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                @using (Ajax.BeginForm("Index", "Comment", new AjaxOptions
+                {
+                    UpdateTargetId = "list-comment"
+                }))
+                {
+                    <div class="col-md-5 pull-right" style="padding-right:0;">
+                        <div class="input-group custom-search-form">
+                            @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Tìm kiếm bình luận" })
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                }
+                @using (Ajax.BeginForm("Delete", "Comment", new AjaxOptions
+                {
+                    UpdateTargetId = "list-comment"
+                }))
+                {
+                    <p>
+                        <button type="submit" onclick="return confirm('Bạn có chắc là muốn xóa không')" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                    </p>
+
+                    if (TempData["AlertMessage"] != null)
+                    {
+                        <div id="alertBox" class="alert alert-@TempData["AlertType"] text-center"> @Html.Raw(TempData["AlertMessage"])</div>
+                    }
+                    <div id="list-comment">
+                        @Html.Partial("_ListComment")
+                    </div>
+                }
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+@section scripts {
+    <script id="reply-template" type="x-tmpl-mustache">
+        <!-- item -->
+        <tr class="form-reply-insert">
+            <td colspan="6">
+                <p>Trả lời phản hồi</p>
+                <textarea class="form-control"></textarea>
+                <button style="margin-top: 5px;" type="button" id="btn-cancel" class="btn btn-default btn-sm">Hủy</button>
+                <button data-id="{{Id}}" data-product-id="{{ProductId}}" style="margin-top: 5px;" type="button" id="btn-create" class="btn btn-primary btn-sm">
+                    Trả lời
+                </button>
+            </td>
+        </tr>
+        <!-- ./ -->
+    </script>
+    <script src="~/Scripts/plugins/mustache.min.js"></script>
+    <script src="~/Assets/Admin/controller/comment.js"></script>
+}

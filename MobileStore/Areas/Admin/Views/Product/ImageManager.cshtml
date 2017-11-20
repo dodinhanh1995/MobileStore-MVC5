@@ -1,0 +1,64 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "Quản lý hình ảnh " + ViewBag.ProductName;
+}
+<style>
+    #imageList .fa-window-close {
+        position: absolute;
+        font-size: 20px;
+        right: 15px;
+        top: 0;
+        color: red;
+        z-index: 500;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="page-header">Quản lý hình ảnh sản phẩm <span class="label label-danger">@ViewBag.ProductName</span></h4>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="form-horizontal">
+    <input type="hidden" id="hidProductId" value="@ViewBag.ProductId" />
+    <div class="col-xs-12">
+        <button id="btn-save" class="btn btn-success">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu lại
+        </button>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container-fluid" style="margin-top: 10px;">
+        <div class="row" id="imageList">
+            @if (Model != null)
+            {
+                foreach (string image in Model)
+                {
+                    <div class="col-sm-2 pointer">
+                        <img class="img-thumbnail img-responsive" src="@image">
+                        <i class="btn-remove-img fa fa-window-close" aria-hidden="true"></i>
+                    </div>
+                }
+            }
+            <div class="col-sm-2 pointer" id="btn-images">
+                <div class="well text-center">
+                    <span class="btn">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    <div class="clearfix">Thêm ảnh</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix">
+    <hr />
+</div>
+<a href="@Url.Action("Index")"><i class="fa fa-backward"></i> Quay lại</a>
+
+@section scripts {
+    <script src="~/Assets/Admin/controller/product.js"></script>
+}
+
+
+

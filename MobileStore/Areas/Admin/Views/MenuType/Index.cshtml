@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Models.EF.MenuType>
+
+@{
+    ViewBag.Title = "Danh sách loại menu";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="page-header">Danh sách loại menu</h4>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                @using (Html.BeginForm("Delete", "MenuType"))
+                {
+                    <p>
+                        <button type="submit" onclick="return confirm('Bạn có chắc là muốn xóa không')" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        <button type="button" id="btnCreateNewMenuType" class="btn btn-default"><i class="fa fa-plus"></i> Create New</button>
+                    </p>
+                    if (TempData["AlertMessage"] != null)
+                    {
+                        <div id="alertBox" class="alert alert-@TempData["AlertType"] text-center">
+                            @Html.Raw(TempData["AlertMessage"])
+                        </div>
+                    }
+                    
+                    @Html.Partial("_MenuTypeForm")
+                }
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+@section scripts {
+    <script src="~/Assets/Admin/controller/menuType.js"></script>
+}

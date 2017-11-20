@@ -1,0 +1,22 @@
+﻿@model Models.ViewModels.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<p class="text-info">Hoặc đăng nhập qua</p>
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() > 0)
+    {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        <button type="submit" class="btn btn-@(p.AuthenticationType == "Facebook" ? "primary" : "danger")" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Đăng nhập sử dụng tài khoản @p.Caption."><i class="fa fa-@(p.AuthenticationType == "Facebook" ? "facebook" : "google")"></i> @p.AuthenticationType</button>
+                    }
+                </p>
+            </div>
+        }
+    }
+}

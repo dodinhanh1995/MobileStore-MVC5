@@ -1,0 +1,27 @@
+﻿@model Models.EF.Menu
+
+@{
+    ViewBag.Title = "Thêm thông tin menu mới";
+}
+
+@using (Html.BeginForm()) 
+{
+    
+    <h4>Thêm thông tin menu mới</h4>
+    <hr />
+
+    <div class="form-horizontal">
+        
+        @Html.Partial("_MenuForm")
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Tạo mới</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

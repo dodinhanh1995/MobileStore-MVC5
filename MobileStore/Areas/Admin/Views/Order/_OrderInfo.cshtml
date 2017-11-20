@@ -1,0 +1,38 @@
+﻿@model Models.ViewModels.OrderDetailViewModel
+
+<h3>Thông tin đơn hàng</h3>
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <td>Mã đơn hàng</td>
+            <td>@Model.Order.Id</td>
+        </tr>
+        <tr>
+            <td>Tổng sản phẩm</td>
+            <td id="lblAmount">@Model.Amount</td>
+        </tr>
+        <tr>
+            <td>Tổng giá trị</td>
+            <td id="lblOrderTotal">@Model.TotalOrder.ToString("N0")đ</td>
+        </tr>
+        <tr>
+            <td width="150">Địa chỉ giao hàng</td>
+            <td>@Model.ShipAddress</td>
+        </tr>
+        <tr>
+            <td>Trạng thái</td>
+            <td>
+                <button class="btn btn-@(Model.StatusOrder == 1 ? "success" : "warning statusLink")" data-order-id="@Model.Order.Id">
+                    @(Model.StatusOrder == 1 ? "Đã thanh toán" : "Đang chờ xử lý")
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>Ngày đặt hàng</td>
+            <td>@Model.Order.CreatedDate.Value.ToString("dd/MM/yyyy hh:mm tt")</td>
+        </tr>
+        <tr id="AlertMessage" class="hide">
+            <td colspan="2"><div class="alert alert-danger text-center"></div></td>
+        </tr>
+    </tbody>
+</table>

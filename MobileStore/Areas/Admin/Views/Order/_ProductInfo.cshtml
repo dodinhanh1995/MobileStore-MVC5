@@ -1,0 +1,55 @@
+﻿@model Models.ViewModels.OrderDetailViewModel
+
+<h3>Thông tin sản phẩm</h3>
+<table class="table table-hover table-striped table-condensed">
+    <thead>
+        <tr class="success">
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá bán</th>
+            <th width="70">SL</th>
+            <th width="150">Thành tiền</th>
+            @if (Model.StatusOrder != 1)
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.OrderDetail)
+        {
+            <tr>
+                <td>@item.Product.Code</td>
+                <td>
+                    <a target="_blank" href="@Url.Action("Index", "Product", new { searchString = item.Product.Code })">
+                        <div class="col-sm-3">
+                            <img src="@item.Product.Image" class="img-responsive" />
+                        </div>
+                        <div class="col-sm-9">
+                            @item.Product.ProductCategory.Name<br />
+                            @item.Product.Name
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    @item.Price.Value.ToString("N0")đ
+                    <p>(Giá @(item.Product.IncludeVAT ? "đã" : "chưa") bao gồm VAT)</p>
+                </td>
+                <td>
+                    <input id="qt_@item.ProductId" class="form-control" type="text" value="@item.Quantity"
+                           @(Model.StatusOrder == 1 ? "readonly" : "") />
+                </td>
+                <td class="text-success"><b id="lblTotalPrice">@((item.Price * @item.Quantity).Value.ToString("N0"))<sup>đ</sup></b></td>
+
+                @if (Model.StatusOrder != 1)
+                {
+                    <td>
+                        <button class="btnUpdateOrder btn btn-primary" orderId="@item.OrderId" productId="@item.ProductId">Cập nhật</button>
+                    </td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>

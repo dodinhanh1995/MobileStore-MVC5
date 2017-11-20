@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Models.EF.Contact>
+@{
+    ViewBag.Title = "Danh sách liên hệ";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách liên hệ</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                @using (Html.BeginForm("Index", "Contact", FormMethod.Get))
+                {
+                    <div class="col-md-10 pull-right">
+                        <div class="col-sm-2">
+                            @Html.DropDownList("columnName", ViewBag.ColumnName as SelectList, new { @class="form-control" })
+                        </div>
+                        <div class="col-sm-10 row">
+                            <div class="input-group custom-search-form">
+                                <span class="input-group-btn">
+                                @Html.TextBox("key", ViewBag.CurrentKey as string, new { @class = "form-control", @placeholder = "Nhập từ khóa" })
+                                    </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+                @Html.Partial("_ListForm")
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+@section scripts {
+    <script src="~/Assets/Admin/controller/contact.js"></script>
+}

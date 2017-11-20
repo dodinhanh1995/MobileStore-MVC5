@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>@Html.CheckBox("chkDeleteAll", new { id = "chkDeleteAll" })</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>
+                    @Html.CheckBox("roleId", htmlAttributes: new { @class = "chkFieldId", value = role.Id })
+                </td>
+                <td><input type="text" value="@role.Name" @(role.Name == "Administrators" ? "readonly" : "") class="form-control" /></td>
+                <td>
+                    @if (role.Name != "Administrators")
+                    {
+                    <button type="button" class="btn btn-outline btn-link editingRole" data-id="@role.Id">
+                        <i class="fa fa-edit"></i> Edit
+                    </button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

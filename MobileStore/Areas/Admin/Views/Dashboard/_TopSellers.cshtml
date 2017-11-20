@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Models.ViewModels.TopSellersViewModel>
+
+<table class="table table-striped">
+    <caption><h4><span class="label label-primary">10 sản phẩm bán chạy</span></h4></caption>
+    <thead>
+        <tr class="success">
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá hiện tại</th>
+            <th>Số lượng (sp)</th>
+            <th>Doanh thu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td><a href="../../dien-thoai-@item.MetaTitle-@item.Id" target="_blank">@item.Name</a></td>
+                <td>@((item.PromotionPrice > 0 ? item.PromotionPrice : item.Price).ToString("N0"))đ</td>
+                <td>@item.Amount</td>
+                <td>@(item.Revenue.HasValue ? item.Revenue.Value.ToString("N0") : "0")đ</td>
+            </tr>
+        }
+    <tbody>
+</table>

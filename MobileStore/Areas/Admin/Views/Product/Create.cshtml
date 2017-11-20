@@ -1,0 +1,35 @@
+﻿@model Models.EF.Product
+
+@{
+    ViewBag.Title = "Thêm mới sản phẩm";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Thêm mới sản phẩm</h4>
+        <hr />
+
+        @Html.Partial("_ProductForm")
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Tạo mới</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.min.js"></script>
+
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        CKEDITOR.replace('Detail');
+        CKEDITOR.replace('Description');
+        $('#TopHot').datetimepicker();
+    </script>
+
+}

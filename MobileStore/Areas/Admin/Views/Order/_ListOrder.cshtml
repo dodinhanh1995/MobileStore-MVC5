@@ -1,0 +1,70 @@
+﻿@model PagedList.IPagedList<Models.ViewModels.OrderViewModel>
+@using PagedList.Mvc;
+
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr class="success">
+            <th>Đơn hàng</th>
+            <th>Giao hàng đến</th>
+            <th>
+                @Ajax.ActionLink("SL", "Index",
+               new { @sortOrder = ViewBag.QTSortParm, currentFilter = ViewBag.CurrentFilter },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "list-order",
+               })
+            </th>
+            <th>
+                @Ajax.ActionLink("Tổng cộng", "Index",
+               new { @sortOrder = ViewBag.TotalSortParm, currentFilter = ViewBag.CurrentFilter },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "list-order",
+               })
+            </th>
+            <th>
+                @Ajax.ActionLink("Ngày đặt", "Index",
+               new { @sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "list-order",
+               })
+            </th>
+            <th>
+                @Ajax.ActionLink("Trạng thái", "Index",
+               new { @sortOrder = ViewBag.StatusSortParm, currentFilter = ViewBag.CurrentFilter },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "list-order",
+               })
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("#" + item.OrderId.ToString(), "Detail", new { id = item.OrderId }) bởi
+                    <em>
+                        @(@item.Gender ? "anh" : "chị") @item.CustomerName.ToUpper()<br />
+                        @item.Email<br />
+                        @item.Phone
+                    </em>
+                </td>
+                <td style="width: 40%;">@item.ShipAddress</td>
+                <td>@item.Amount</td>
+                <td>@item.Total.ToString("N0")đ</td>
+                <td>@item.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</td>
+                <td>
+                    <span class="label label-@(item.Status == 1 ? "success" : "warning")">
+                        @(item.Status == 1 ? "Hoàn tất" : "Đang xử lý" )
+                    </span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

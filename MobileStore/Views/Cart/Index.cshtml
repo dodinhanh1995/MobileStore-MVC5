@@ -1,0 +1,49 @@
+﻿@model Models.ViewModels.CartViewModel
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<div id="content" class="clearfix">
+    <div class="col-md-3 col-sm-2"></div>
+    <div class="col-md-6 col-sm-8 bg-white" style="padding: 10px 20px; ">
+        @if (Model.CartItems.Count() > 0)
+            {
+            <div>
+                <a href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i> Mua thêm sản phẩm khác
+                </a>
+                <span class="pull-right">Giỏ hàng của bạn</span>
+            </div>
+            <div class="clearfix"><hr /></div>
+            <div class="row">
+                <div class="col-xs-12">
+                    @Html.Partial("_ListCartItem", Model.CartItems)
+                </div>
+
+                @* Total *@
+                <div class="col-xs-6">
+                    <small class="lead">Tổng tiền:</small>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <p class="price" id="CartTotal"><strong>@Model.CartTotal.ToString("N0")đ</strong></p>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+                <a href="@Url.Action("Index","Checkout")" style="border-radius: initial;" class="btn btn-lg btn-danger btn-block">
+                    ĐẶT HÀNG / ORDER
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="text-center" style="margin:150px auto;">
+                <h2>Giỏ hàng trống</h2>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/sc-cart")
+    @*<script src="~/Assets/Client/controller/cart.js"></script>*@
+}

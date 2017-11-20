@@ -1,0 +1,27 @@
+﻿@model Models.EF.ProductCategory
+
+@{
+    ViewBag.Title = "Thêm mới danh mục sản phẩm";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Thêm mới danh mục sản phẩm</h4>
+        <hr />
+        
+        @Html.Partial("_ProductCategoryForm")
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Tạo mới</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

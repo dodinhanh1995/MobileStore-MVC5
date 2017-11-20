@@ -1,0 +1,62 @@
+﻿@model Models.ViewModels.CartStatusToHeaderViewModel
+@{
+    IEnumerable<Models.ViewModels.NavigationViewModel> TopMenu = ViewBag.TopMenu;
+}
+<div class="col-xs-9 logo">
+    <a href="@Url.Action("Index", "Home")" title="Về trang chủ AnhDo Mobile">
+        <h1>anhdo<span class="dotcom">mobile</span></h1>
+    </a>
+</div>
+<div id="CartStatus" class="col-xs-3 right">
+    <a class="cart" title="Giỏ hàng của bạn">
+        <i class="fa fa-shopping-bag"></i>
+        @if (Model.ItemCount > 0)
+        {
+            <span class="total">@Model.ItemCount</span>
+            <div class="info">
+                @foreach (var item in Model.CartItems)
+                {
+                    <!-- row -->
+                    <div class="row">
+                        <img class="col-xs-3" src="@item.Image" alt="@item.Name" title="@item.Name">
+                        <div class="col-xs-9">
+                            <h2 class="name">@item.Name (@item.Count)</h2>
+                            <span class="price">
+                                @(item.Price.ToString("N0"))đ
+                            </span>
+                        </div>
+                    </div>
+                }
+                <!-- ./row -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        Tổng:<strong class="price" id="total-status">@Model.CartTotal.ToString("N0")đ</strong>
+                        <span class="btn btn-xs btn-success" onclick="window.location.href= '@Url.Action("Index", "Cart")'">Thanh toán</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </a>
+    @Html.Partial("_LoginPartial", TopMenu)
+</div>
+
+<script id="cart-st-info-template" type="x-tmpl-mustache">
+    <div class="row">
+        <img class="col-xs-3" src="{{ProductImage}}" alt="{{ProductName}}" title="{{ProductName}}">
+        <div class="col-xs-9">
+            <h2 class="name">{{ProductName}} ({{Count}})</h2>
+            <span class="price">
+                {{ProductPrice}}
+            </span>
+        </div>
+    </div>
+</script>
+
+<script id="cart-st-total-template" type="x-tmpl-mustache">
+    <div class="row">
+        <div class="col-xs-12">
+            Tổng:<strong class="price" id="total-status">{{CartTotal}}</strong>
+            <span class="btn btn-xs btn-success" onclick="window.location.href= '@Url.Action("Index", "Cart")'">Thanh toán</span>
+        </div>
+    </div>
+</script>

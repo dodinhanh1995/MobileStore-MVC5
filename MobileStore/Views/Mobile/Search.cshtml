@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Models.ViewModels.ProductSearchViewModel>
+@{
+    ViewBag.Title = "Tìm kiếm từ khóa" + ViewBag.Key;
+}
+
+
+<div id="content" class="clearfix">
+
+    <nav class="col-xs-12 filter">
+        <ul>
+            <li>
+                <a href="javascript:void(0);">Tìm thấy @Model.Count() kết quả phù hợp với từ khóa "@ViewBag.Key"</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="products-brand clearfix">
+        <div class="col-md-12 item" id="product-content">
+            @foreach (var product in Model)
+            {
+                string delPrice = string.Empty;
+                if (product.PromotionPrice > 0)
+                {
+                    delPrice = "line-through";
+                }
+                <!-- item -->
+                <div class="product-box">
+                    <a href="/dien-thoai-@product.MetaTitle-@product.Id" title="@product.Name">
+                        <img class="img-responsive" src="@product.Image" alt="@product.Name">
+                    </a>
+                    <h3 class="name">@product.Name</h3>
+                    <div class="text-left" style="height:20px;">
+                        @if (product.PromotionPrice > 0)
+                        {
+                            <strong class="price">
+                                @Html.DisplayFor(model => product.PromotionPrice)
+                            </strong>
+                        }
+                    </div>
+                    <div class="price-buy">
+                        <strong class="price @delPrice">@Html.DisplayFor(model => product.Price)</strong>
+                        <a href="@Url.Action("AddToCart", "Cart", new { productId = product.Id })">Mua ngay</a>
+                    </div>
+
+                </div>
+                <!-- ./ -->
+            }
+        </div>
+    </div>
+</div>

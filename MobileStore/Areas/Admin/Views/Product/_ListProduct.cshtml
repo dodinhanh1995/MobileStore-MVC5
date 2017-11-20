@@ -1,0 +1,118 @@
+﻿@model PagedList.IPagedList<Models.ViewModels.ProductViewModels>
+@using PagedList.Mvc;
+
+<table style="margin-top:10px;" class="table table-striped table-bordered table-hover">
+
+    <thead>
+        <tr class="success">
+            <th style="width: 2%;">@Html.CheckBox("chkDeleteAll", new { id = "chkDeleteAll" })</th>
+            <th style="width: 30%;">
+                @Ajax.ActionLink("Sản phẩm", "Index", new { @sortOrder = ViewBag.NameParam, currentFilter = ViewBag.CurrentFilter },
+           new AjaxOptions
+           {
+               UpdateTargetId = "list-product"
+           })
+            </th>
+            <th style="width: 5%;">
+                @Ajax.ActionLink("VAT", "Index", new { @sortOrder = ViewBag.VATParam, currentFilter = ViewBag.CurrentFilter },
+           new AjaxOptions
+           {
+               UpdateTargetId = "list-product"
+           })
+            </th>
+            <th style="width: 5%;">
+                @Ajax.ActionLink("SL", "Index", new { @sortOrder = ViewBag.QuantityParam, currentFilter = ViewBag.CurrentFilter },
+           new AjaxOptions
+           {
+               UpdateTargetId = "list-product"
+           })
+            </th>
+            <th style="width: 10%;">
+                @Ajax.ActionLink("Danh mục", "Index", new { @sortOrder = ViewBag.CategoryParam, currentFilter = ViewBag.CurrentFilter },
+           new AjaxOptions
+           {
+               UpdateTargetId = "list-product"
+           })
+            </th>
+            <th style="width: 15%;">
+                @Ajax.ActionLink("Ngày tạo", "Index", new { @sortOrder = ViewBag.DateParam, currentFilter = ViewBag.CurrentFilter },
+           new AjaxOptions
+           {
+               UpdateTargetId = "list-product"
+           })
+            </th>
+            <th style="width: 15%;">
+                @Ajax.ActionLink("Up Home", "Index", new { @sortOrder = ViewBag.TopHotParam, currentFilter = ViewBag.CurrentFilter },
+           new AjaxOptions
+           {
+               UpdateTargetId = "list-product"
+           })
+            </th>
+            <th style="width: 10%;">
+                @Ajax.ActionLink("Trạng thái", "Index", new { @sortOrder = ViewBag.StatusParam, currentFilter = ViewBag.CurrentFilter },
+           new AjaxOptions
+           {
+               UpdateTargetId = "list-product"
+           })
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@Html.CheckBox("productId", htmlAttributes: new { @class = "chkFieldId", value = product.Id })</td>
+                <td>
+                    <b>@product.Code</b>
+                    <br />
+                    @product.Name
+                    <p>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img class="pointer img-responsive" src="@product.Image" id="img_@product.Id" onclick="selectImage('/Product/ChangeImage/@product.Id', this.id)" />
+                            </div>
+                            <div class="col-md-7">
+                                <i class="fa fa-usd" aria-hidden="true"></i>
+                                @if (product.PromotionPrice > 0)
+                                {
+                                    <del>@Html.DisplayFor(model => product.Price)</del>
+                                    <b>@Html.DisplayFor(model => product.PromotionPrice)</b>
+                                }
+                                else
+                                {
+                                    <b>@Html.DisplayFor(model => product.Price)</b>
+                                }
+                                <br /><i class="fa fa-eye" aria-hidden="true"></i> @product.ViewCount
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <a href="@Url.Action("ImageManager", new { id = product.Id })" class="btn btn-success btn-xs btn-images"><i class="fa fa-link"></i> Quản lý ảnh</a>
+
+                            <a class="btn btn-primary btn-xs" href="@Url.Action("Edit", new { id = product.Id })"><i class="fa fa-edit"></i> Cập nhật</a>
+                            <a class="btn btn-info btn-xs" href="@Url.Action("Specification", new { id = product.Id })"><i class="fa fa-info-circle"></i> Chi tiết</a>
+                        </div>
+                    </p>
+                </td>
+                <td><span class="label label-@(product.IncludeVAT ? "success" : "danger")">@(product.IncludeVAT ? "Đã có" : "Chưa có")</span></td>
+                <td>@Html.Raw(product.Quantity == 0 ? "<span class='label label-warning'>Hết hàng</span>" : product.Quantity.ToString())</td>
+                <td>@product.CategoryName</td>
+                <td>@Html.DisplayFor(model => product.CreatedDate) <br />bởi <b>@product.CreatedBy</b></td>
+                <td>
+                    @if (product.TopHot > DateTime.Now)
+                    {
+                        @Html.DisplayFor(model => product.TopHot)
+                    }
+                </td>
+                <td><span class="label label-@(product.Status ? "success" : "danger")">@(product.Status ? "Hiển thị" : "Ẩn" )</span></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@if (Model.PageCount > 1)
+{
+    @:Trang @Model.PageNumber / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+}
+

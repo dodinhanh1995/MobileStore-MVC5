@@ -1,0 +1,30 @@
+﻿@model Models.ViewModels.LoadProductCommentViewModel
+
+@if (Model.ReplyList.Count() > 0)
+{
+    <div class="list-reply form-reply-@Model.Id">
+        @foreach (var reply in Model.ReplyList)
+        {
+            <div class="reply">
+                <div class="row-user">
+                    <a href="javascript:void(0)">
+                        <div>@reply.RepresentRespondent</div>
+                        <strong>@reply.Respondent</strong>
+                        @if (reply.RoleName == "Administrators")
+                    {
+                            <span class="label label-warning">Quản trị viên</span>
+                        }
+                    </a>
+                </div>
+                <div class="cont">
+                    @reply.Content
+                </div>
+                <div class="action-user">
+                    <a href="javascript:void(0)" onclick="productDetailCtl.replyComment(@Model.Id, true, this)" recipient="@reply.Respondent" class="respondent">Trả lời</a>
+                    <a href="javascript:void(0)" class="time text-muted">&diams; @reply.ReplyDate</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+

@@ -1,0 +1,106 @@
+﻿@model Models.ViewModels.DetailPageViewModel
+@{
+    ViewBag.Title = "Điện thoại " + Model.Product.Name;
+}
+
+<div id="content" class="clearfix">
+    <nav class="breadcum" style="margin-top:-5px;">
+        <ul>
+            <li>
+                <a href="@Url.Action("Index", "Home")">Trang chủ <i class="fa fa-angle-right"></i></a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Mobile", new { metaTitle = "" })">Điện thoại <i class="fa fa-angle-right"></i></a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Mobile", new { metaTitle = Model.Product.CategoryMetaTitle })">@Model.Product.CategoryName</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="details" class="clearfix">
+        <h1 class="name">@Model.Product.Name</h1>
+        <hr />
+        <div id="product-info">
+            <div class="left">
+                @{Html.RenderAction("_Images", new { moreImages = Model.Product.MoreImages });}
+            </div>
+            <!-- ./ left -->
+            <div class="info">
+                @Html.Partial("_ProductInfo", Model.Product)
+            </div>
+            <!-- ./ info -->
+            <div class="right">
+                @Html.Partial("_Specification", Model.ProductSpecification)
+            </div>
+            <!-- ./ right -->
+        </div>
+
+        <!-- Description -->
+        <div class="col-sm-8" style="padding:0;">
+            @Html.Raw(Model.Product.Description)
+            <br />
+            <div id="comment">
+                @{Html.RenderAction("_Comment", new { productId = Model.Product.Id });}
+            </div>
+            <!-- ./ Comment -->
+            <!-- ./ description -->
+        </div>
+        <div id="related-products" class="col-sm-4 col-xs-12">
+            @Html.Partial("_ProductRelated", Model.ProductRelated)
+        </div>
+        <!-- ./ related product -->
+    </div>
+</div>
+
+@section scripts {
+
+    <script id="comment-template" type="x-tmpl-mustache">
+        <div class='row-user'>
+            <a href='javascript:void(0)'>
+                <div>{{RepresentCommenter}}</div><strong>{{Commenter}}</strong>
+            </a>
+        </div>
+        <div class='question'>{{Content}}</div>
+        <div class='action-user'>
+            <a href='javascript:void(0)' onclick="productDetailCtl.replyComment({{Id}}, false, this)" recipient="{{Commenter}}" class="respondent">
+                Trả lời
+            </a>
+            <a href='javascript:void(0)' class='time text-muted'>&diams; {{CommentDate}}</a>
+        </div>
+    </script>
+
+    <script id="commentReply-template" type="x-tmpl-mustache">
+        <div class='reply'>
+            <div class='row-user'>
+                <a href='javascript:void(0)'>
+                    <div>{{RepresentRespondent}}</div>
+                    <strong>{{Respondent}}</strong>
+                    {{{Administrator}}}
+                </a>
+            </div>
+            <div class='cont'>{{Content}}</div>
+            <div class='action-user'>
+                <a href='javascript:void(0)' onclick="productDetailCtl.replyComment({{Id}}, true, this)" recipient="{{Respondent}}" class='respondent'>Trả lời</a>
+                <a href='javascript:void(0)' class='time text-muted'>&diams; {{ReplyDate}}</a>
+            </div>
+        </div>
+    </script>
+
+
+    <script id="reply-template" type="x-tmpl-mustache">
+        <div id="form-to-reply" class="clearfix">
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Phản hồi {{Recipient}}" rows="5"></textarea>
+            </div>
+            <button onclick="productDetailCtl.createReply(this, {{CommentId}})" class="btn btn-primary pull-right">
+                Gửi
+            </button>
+
+        </div>
+    </script>
+
+    @*<script src="~/Assets/Client/controller/productdetail.js"></script>*@
+    
+    @Scripts.Render("~/bundles/sc-detailproduct");
+}

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Models.ViewModels.ProductRelatedViewModel>
+
+<h4>Sản phẩm tương tự</h4>
+<div class="clearfix"></div>
+<div class="relate">
+    @foreach (var item in Model)
+    {
+    <!-- related item -->
+        <a class="item col-sm-12 col-xs-3" href="/dien-thoai-@item.MetaTitle-@item.Id">
+            <div class="picture col-sm-3 col-xs-12 text-center">
+                <img class="img-responsive" src="@item.Image" title="@item.Name">
+            </div>
+            <div class="col-sm-9 col-xs-12">
+                <h2 class="name">@item.Name</h2>
+                    @if (item.PromotionPrice > 0)
+                    {
+                        <div>
+                            <b class="price">@Html.DisplayFor(model => item.PromotionPrice)<sup>đ</sup></b>
+                        </div>
+                        <div>
+                            <b><del>@Html.DisplayFor(model => item.Price)<sup>đ</sup></del></b>
+                        </div>
+                    }
+                    else
+                    {
+                        <b class="price">@Html.DisplayFor(model => item.Price)<sup>đ</sup></b>
+                    }
+                <div class="desc">
+                    <span>Màn hình @item.Screen</span>
+                    <span>Camera sau @item.CameraAfter</span>
+                    <span>Camera trước @item.CameraBefore</span>
+                    <span>Dung lượng pin @item.PinCapacity</span>
+                </div>
+            </div>
+        </a>
+    <!-- ./ item -->
+    }
+</div>
+<!-- relate -->

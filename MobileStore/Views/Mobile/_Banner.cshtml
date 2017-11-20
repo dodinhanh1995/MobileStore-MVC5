@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Models.ViewModels.AdvertisementViewModel>
+<div id="banner" class="clearfix">
+    <div class="banner-left col-xs-6">
+        @{
+            int count = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (count == 1)
+            {
+                @:</div>
+                @:<div class="banner-right col-xs-6">
+            }
+            <a href="@item.Link" target="@item.Target" title="@item.Name"><img src="@item.Image" class="img-responsive" alt="@item.Name" /></a>
+            count++;
+        }
+
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Models.ViewModels.TopCustomersViewModel>
+
+<table class="table table-striped">
+    <caption><h4><span class="label label-primary">Khách hàng nổi bật</span></h4></caption>
+    <thead>
+        <tr class="success">
+            <th>Tên khách hàng</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Tổng số đơn hàng</th>
+            <th>Số tiền đã chi tiêu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CustomerName</td>
+                <td>@item.Email</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.TotalOrder</td>
+                <td>@(item.Revenue.HasValue ? item.Revenue.Value.ToString("N0") : "0")đ</td>
+            </tr>
+        }
+    <tbody>
+</table>
+
+
+

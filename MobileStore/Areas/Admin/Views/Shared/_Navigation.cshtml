@@ -1,0 +1,111 @@
+﻿<div class="sidebar-nav navbar-collapse">
+    <ul class="nav" id="side-menu">
+        <li class="sidebar-search">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" id="filtering" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-dashboard fa-fw"></i> Thống kê</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Order")"><i class="fa fa-shopping-bag fa-fw"></i> Đơn hàng</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Comment")"><i class="fa fa-comments-o fa-fw"></i> Phản hồi</a>
+            <!-- /.nav-second-level -->
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "User")"><i class="fa fa-user fa-fw"></i> Người dùng</a>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "Role")"><i class="fa fa-user-md fa-fw"></i> Nhóm người dùng</a>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="#"><i class="fa fa-picture-o fa-fw"></i> Quảng cáo<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                <li>
+                    <a href="@Url.Action("Index", "Slide")">Danh sách quảng cáo</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Create", "Slide")">Tạo quảng cáo mới</a>
+                </li>
+            </ul>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="#"><i class="fa fa-picture-o fa-fw"></i> Danh mục sản phẩm<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                <li>
+                    <a href="@Url.Action("Index", "ProductCategory")">Danh sách danh mục</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Create", "ProductCategory")">Tạo danh mục mới</a>
+                </li>
+            </ul>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="#"><i class="fa fa-mobile fa-fw"></i> Sản phẩm<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                <li>
+                    <a href="@Url.Action("Index", "Product")">Danh sách sản phẩm</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Create", "Product")">Tạo sản phẩm mới</a>
+                </li>
+            </ul>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="#"><i class="fa fa fa-bars fa-fw"></i> Menu<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                <li>
+                    <a href="@Url.Action("Index", "Menu")">Danh sách menu</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Create", "Menu")">Tạo menu mới</a>
+                </li>
+            </ul>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "MenuType")"><i class="fa fa fa-industry fa-fw"></i> Loại menu</a>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "Map")"><i class="fa fa-map-marker fa-fw"></i> Bản đồ</a>
+        </li>
+       
+        <li>
+            <a href="@Url.Action("Index", "About")"><i class="fa fa fa-building fa-fw"></i> Giới thiệu</a>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "Contact")"><i class="fa fa-volume-control-phone fa-fw"></i> Liên hệ</a>
+            <!-- /.nav-second-level -->
+        </li>
+
+        <li>
+            <a href="@Url.Action("Index", "Footer")"><i class="fa fa-location-arrow fa-fw"></i> Footer</a>
+            <!-- /.nav-second-level -->
+        </li>
+    </ul>
+</div>
+<!-- /.sidebar-collapse -->

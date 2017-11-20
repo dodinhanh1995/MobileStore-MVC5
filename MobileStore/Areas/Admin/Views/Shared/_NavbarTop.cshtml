@@ -1,0 +1,21 @@
+﻿<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-user fa-fw"></i>@User.Identity.Name <i class="fa fa-caret-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-user">
+        <li>
+            <a href="@Url.Action("Index", "../Manage")"><i class="fa fa-user fa-fw"></i> User Profile</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            @using (Html.BeginForm("LogOff", "../Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <a class="login" href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            }
+        </li>
+    </ul>
+    <!-- /.dropdown-user -->
+</li>
+<!-- /.dropdown -->

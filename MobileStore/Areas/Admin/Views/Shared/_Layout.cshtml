@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - Admin Area</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/Assets/Admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Social Buttons CSS -->
+    <link href="~/Assets/Admin/vendor/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Assets/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+</head>
+<body id="body">
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "../Home")">Mobile Store</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+                @{Html.RenderPartial("_NavbarTop"); }
+            </ul>
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                @{Html.RenderPartial("_Navigation"); }
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid row">
+                @RenderBody()
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Assets/Admin/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <!-- CKEditor Plugin -->
+    <script src="~/Assets/Common/ckfinder/ckfinder.js"></script>
+    <script src="~/Assets/Common/ckeditor/ckeditor.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Assets/Admin/controller/navigation.js"></script>
+    <script src="~/Assets/Admin/dist/js/sb-admin-2.js"></script>
+
+    <script src="~/Assets/Admin/controller/custom.js"></script>
+
+    @RenderSection("scripts", false)
+
+    <script src="~/Scripts/removeSomee.js"></script>
+
+</body>
+</html>

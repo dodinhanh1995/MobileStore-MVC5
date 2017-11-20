@@ -1,0 +1,72 @@
+﻿@model Models.ViewModels.StatisticsViewModel
+@{
+    ViewBag.Title = "Báo cáo tình hình kinh doanh";
+}
+
+<h4 class="page-header">Báo cáo hoạt động kinh doanh</h4>
+
+<ul id="tabs-statistics" class="nav nav-tabs">
+    <li class="active">
+        @Ajax.ActionLink("Năm", "Index", new { date = "year" },
+       new AjaxOptions
+       {
+           UpdateTargetId = "statistics",
+           InsertionMode = InsertionMode.Replace,
+           HttpMethod = "GET"
+       })
+    </li>
+    <li>
+        @Ajax.ActionLink("Tháng trước", "Index", new { date = "lastMonth" },
+       new AjaxOptions
+       {
+           UpdateTargetId = "statistics",
+           InsertionMode = InsertionMode.Replace,
+           HttpMethod = "GET"
+       })
+    </li>
+    <li>
+        @Ajax.ActionLink("Tháng này", "Index", new { date = "thisMonth" },
+       new AjaxOptions
+       {
+           UpdateTargetId = "statistics",
+           InsertionMode = InsertionMode.Replace,
+           HttpMethod = "GET"
+       })
+    </li>
+    <li>
+        @Ajax.ActionLink("7 ngày trước", "Index", new { date = "last7Day" },
+       new AjaxOptions
+       {
+           UpdateTargetId = "statistics",
+           InsertionMode = InsertionMode.Replace,
+           HttpMethod = "GET"
+       })
+    </li>
+    <li>
+        <a>
+            @using (Ajax.BeginForm("Index", new AjaxOptions
+            {
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "GET",
+                OnBegin = "fnOnBegin",
+                UpdateTargetId = "statistics",
+            }))
+            {
+                <input type="hidden" name="date" value="options" />
+                <input type="date" title="Thời gian bắt đầu" name="from" id="from-date" />
+                <input type="date" title="Thời gian kết thúc" name="to" id="to-date" />
+                
+                <input type="submit" value="Chọn" title="Thống kê theo tùy chọn" />
+            }
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content" id="statistics">
+    @Html.Partial("_ListData")
+</div>
+
+@section scripts {
+    <script src="~/Assets/Admin/controller/statistics.js"></script>
+}
+

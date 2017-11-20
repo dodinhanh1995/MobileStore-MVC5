@@ -1,0 +1,29 @@
+﻿@model Models.ViewModels.BannerViewModel
+@{
+    ViewBag.Title = "Điện thoại AnhDo, smartphone,apple,samsung tại hà nội";
+}
+
+
+<div id="slider">
+    @Html.Partial("_SlideShow", Model)
+</div>
+
+<div id="content" class="clearfix">
+
+    <div class="products-new clearfix">
+        @{Html.RenderAction("_ProductsNew", "Home"); }
+    </div>
+
+    <div class="products-feature clearfix">
+        @{Html.RenderAction("_ProductsFeature", "Home"); }
+
+        <div class="advertise col-xs-4 col-sm-3">
+            @foreach (var aside in Model.HomeAsides)
+            {
+                <a href="@aside.Link" target="@aside.Target" title="@aside.Name">
+                    <img class="img-responsive" src="@aside.Image" alt="@aside.Name" />
+                </a>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Models.EF.ProductCategory>
+
+@{
+    ViewBag.Title = "Danh sách danh mục sản phẩm";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4 class="page-header">Danh sách danh mục sản phẩm</h4>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                @using (Html.BeginForm("Delete", "ProductCategory"))
+                {
+                    <div class="col-md-8 row">
+                        <button type="submit" onclick="return confirm('Bạn có chắc là muốn xóa không')" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        <a href="@Url.Action("Create")" class="btn btn-default"><i class="fa fa-plus"></i> Create New</a>
+                    </div>
+                    <div class="col-md-4 row pull-right">
+                        <input type="text" onkeyup="filterTable(this)" class="form-control" placeholder="Nhập từ khóa...">
+                    </div>
+                    <div class="clearfix"></div>
+                    if (TempData["AlertMessage"] != null)
+                    {
+                        <div id="alertBox" class="alert alert-@TempData["AlertType"] text-center">
+                            @Html.Raw(TempData["AlertMessage"])
+                        </div>
+                    }
+
+                    @Html.Partial("_ListForm")
+                }
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

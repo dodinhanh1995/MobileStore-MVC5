@@ -1,0 +1,22 @@
+﻿<ul>
+    <li>
+        <a href="javascript:void(0);">Thương hiệu <i class="fa fa-caret-down"></i></a>
+        <div class="dropdown">
+            <span class="tooltip-filter"></span>
+            <a href="@Url.Action("Index", new { metaTitle = string.Empty, orderBy = ViewBag.SortOrder })" title="Tất cả thương hiệu">Tất cả thương hiệu</a>
+            @foreach (var category in ViewBag.BrandList as IEnumerable<Models.ViewModels.CategoryNameViewModel>)
+            {
+                <a href="@Url.Action("Index", new { metaTitle = category.MetaTitle, orderBy = ViewBag.SortOrder })" title="@category.CategoryName">@category.CategoryName</a>
+            }
+        </div>
+    </li>
+    <li>
+        <a href="javascript:void(0);">Sắp xếp <i class="fa fa-caret-down"></i></a>
+        <div class="dropdown">
+            <span class="tooltip-filter"></span>
+            <a href="@Url.Action("Index", new { metaTitle = ViewBag.MetaTitle, orderBy = "asc"})">Giá thấp đến cao</a>
+            <a href="@Url.Action("Index", new { metaTitle = ViewBag.MetaTitle, orderBy = "desc" })">Giá cao đến thấp</a>
+        </div>
+    </li>
+</ul>
+

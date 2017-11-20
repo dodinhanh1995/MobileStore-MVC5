@@ -1,0 +1,80 @@
+﻿@model Models.EF.Order
+
+@{
+    ViewBag.Title = "Đặt hàng";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<div id="content" class="clearfix">
+    <div class="col-lg-3 col-md-2 col-sm-2"></div>
+    <div class="col-lg-6 col-md-8 col-sm-8" style="background-color: #FFF; padding:15px;">
+        <div class="row">
+            <div class="col-xs-5 back-to-cart">
+                <a href="@Url.Action("Index", "Cart")">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Trở lại giỏ hàng
+                </a>
+            </div>
+            <div class="col-xs-7 text-right">
+                <span class="label label-success">Vui lòng điền thông tin giao hàng.</span>
+            </div>
+        </div>
+        <div><hr /></div>
+        @using (Html.BeginForm())
+            {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.ShipGender, true)Nam
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.ShipGender, false)Nữ
+                </label>
+                <p>@Html.ValidationMessageFor(m => m.ShipGender, "", new { @class = "text-danger" })</p>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.TextBoxFor(model => model.ShipName, new { @class = "form-control", @placeholder = "Họ và tên" })
+                    @Html.ValidationMessageFor(m => m.ShipName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.TextBoxFor(model => model.ShipMobile, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                    @Html.ValidationMessageFor(m => m.ShipMobile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.ShipEmail, new { @class = "form-control", @placeholder = "Địa chỉ email" })
+                @Html.ValidationMessageFor(m => m.ShipEmail, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    @Html.DropDownList("ProvinceId", new SelectList(new string[] { }), new { @id = "ddlProvince", @class = "form-control", @placeholder = "Họ và tên" })
+                    @Html.ValidationMessageFor(m => m.ProvinceId, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.DropDownList("DistrictId", new SelectList(new string[] { }), new { @id = "ddlDistrict", @class = "form-control", @placeholder = "Số điện thoại" })
+                    @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.ShipAddress, new { @class = "form-control", @placeholder = "Số nhà, tên đường, phường / xã", @rows = "5" })
+                @Html.ValidationMessageFor(m => m.ShipAddress, "", new { @class = "text-danger" })
+            </div>
+
+                <button type="submit" style="border-radius: initial;" class="btn btn-block">THANH TOÁN KHI NHẬN HÀNG</button>
+        }
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+    <script id="province-district-template" type="x-tmpl-mustache">
+        <option value="{{DataValue}}">{{DataText}}</option>
+    </script>
+    @Scripts.Render("~/bundles/sc-checkout");
+    @*<script src="~/Assets/Client/controller/checkout.js"></script>*@
+}
+
+

@@ -1,0 +1,28 @@
+﻿@model Models.ViewModels.OrderDetailViewModel
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <a href="@Url.Action("Index")"><i class="fa fa-backward"></i> Quay lại</a>
+        <div class="row">
+            <div class="col-sm-5">
+                @Html.Partial("_CustomerInfo")
+            </div>
+            <div class="col-sm-7">
+                @Html.Partial("_OrderInfo")
+            </div>
+            <div class="clearfix"></div>
+            <hr style="margin:0" />
+            <div class="col-xs-12">
+                @Html.Partial("_ProductInfo")
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/Assets/Admin/controller/order.js"></script>
+}
+
